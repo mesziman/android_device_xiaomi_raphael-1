@@ -37,8 +37,7 @@ int open_ts_input() {
 
                 fd = open(absolute_path, O_RDWR);
                 if (ioctl(fd, EVIOCGNAME(sizeof(name) - 1), &name) > 0) {
-                    if (strcmp(name, "goodix_ts") == 0)
-                        break;
+                    if (strcmp(name, "goodix_ts") == 0) break;
                 }
 
                 close(fd);
@@ -79,8 +78,8 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
         case Mode::DOUBLE_TAP_TO_WAKE: {
             int fd = open_ts_input();
             if (fd == -1) {
-                LOG(WARNING)
-                    << "DT2W won't work because no supported touchscreen input devices were found";
+                LOG(WARNING) << "DT2W won't work because no supported touchscreen input devices "
+                                "were found";
                 return false;
             }
             struct input_event ev;
